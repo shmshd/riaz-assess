@@ -4,8 +4,7 @@ services:
 
   frontend:
     container_name: frontend
-    build:
-      context: ./frontend
+    image: frontend
     ports:
       - "3000:3000"
     volumes:
@@ -13,8 +12,7 @@ services:
 
   backend:
     container_name: backend
-    build:
-      context: ./backend
+    image: backend
     ports:
       - "4000:4000"
     volumes:
