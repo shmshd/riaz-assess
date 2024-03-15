@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/usr/src/app
+
+  database:
+    container_name: database
+    image: mysql
+    ports:
+      - "3306"
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+      MYSQL_DATABASE: cspeed
+      MYSQL_USER: cspeed
+      MYSQL_PASSWORD: cspeed
