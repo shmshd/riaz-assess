@@ -15,6 +15,11 @@ services:
     image: backend
     ports:
       - "4000:4000"
+    environment:
+      DB_HOST: database
+      DB_USER: cspeed
+      DB_PASSWORD: cspeed
+      DB_NAME: cspeed
     volumes:
       - .:/app
 
