@@ -28,3 +28,9 @@ services:
       MYSQL_DATABASE: cspeed
       MYSQL_USER: cspeed
       MYSQL_PASSWORD: cspeed
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d/
+
+volumes:
+  db-data:
