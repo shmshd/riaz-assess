@@ -8,7 +8,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/usr/src/app
+      - .:/app
 
   backend:
     container_name: backend
@@ -16,7 +16,7 @@ services:
     ports:
       - "4000:4000"
     volumes:
-      - .:/usr/src/app
+      - .:/app
 
   database:
     container_name: database
