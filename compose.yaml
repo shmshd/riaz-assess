@@ -4,24 +4,34 @@ services:
 
   frontend:
     container_name: frontend
-    image: frontend
+    build:
+      context: ./frontend
+    depends_on:
+      - backend
+    links:
+      - backend
     ports:
       - "3000:3000"
-    volumes:
-      - .:/app
+    networks:
+      - stack
 
   backend:
     container_name: backend
-    image: backend
+    build:
+      context: ./backend
+    depends_on:
+      - database
+    restart: always
     ports:
       - "4000:4000"
     environment:
+      ADDRESS: backend
       DB_HOST: database
       DB_USER: cspeed
       DB_PASSWORD: cspeed
-      DB_NAME: cspeed
-    volumes:
-      - .:/app
+      DB_NAME: todos
+    networks:
+      - stack
 
   database:
     container_name: database
@@ -30,12 +40,17 @@ services:
       - "3306"
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
-      MYSQL_DATABASE: cspeed
+      MYSQL_DATABASE: todos
       MYSQL_USER: cspeed
       MYSQL_PASSWORD: cspeed
     volumes:
       - db-data:/var/lib/mysql
       - ./database:/docker-entrypoint-initdb.d/
+    networks:
+      - stack
 
 volumes:
   db-data:
+
+networks:
+  stack:

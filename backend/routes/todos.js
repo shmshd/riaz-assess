@@ -2,7 +2,12 @@ module.exports = async function (fastify, opts) {
 
     // Get all items
     fastify.get('/todos', async (request, reply) => {
-        return await fastify.mysql.query('SELECT * FROM items');
+        const connection = await fastify.mysql.getConnection()
+        const [rows] = await connection.query(
+            'SELECT * FROM items',
+        )
+        connection.release();
+        return rows;
     });
 
     // Add a new item
