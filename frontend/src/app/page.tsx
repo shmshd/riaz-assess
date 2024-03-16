@@ -1,17 +1,19 @@
-import {getItems} from "@/components/crud";
-import {TrashIcon} from "@radix-ui/react-icons";
-
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {Button} from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
-    DialogDescription, DialogFooter,
+    DialogDescription,
+    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger
 } from "@/components/ui/dialog";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
+
+import {AddTodo} from "@/components/add-item";
+import {Button} from "@/components/ui/button";
 import {RemoveTodo} from "@/components/remove-item";
+import {TrashIcon} from "@radix-ui/react-icons";
+import {getItems} from "@/components/crud";
 
 export default async function Home() {
     const todos = await getItems();
@@ -58,6 +60,7 @@ export default async function Home() {
                         ))}
                     </TableBody>
                 </Table>
+                <AddTodo />
             </div>
         </main>
     );
