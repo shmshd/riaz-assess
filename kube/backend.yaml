@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: muhammedriaz/cspeed-backend
+          ports:
+            - containerPort: 4000
+          env:
+            - name: ADDRESS
+              value: backend
+            - name: DB_HOST
+              value: database
+            - name: DB_USER
+              value: cspeed
+            - name: DB_PASSWORD
+              value: cspeed
+            - name: DB_NAME
+              value: todos
+          imagePullPolicy: Always
